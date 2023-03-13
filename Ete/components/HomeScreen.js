@@ -1,11 +1,27 @@
-import React from "react";
-import {ImageBackground, View, Text, StyleSheet} from "react-native";
+import React, { useState } from "react";
+import axios from 'axios';
+import {ImageBackground, View, Text, StyleSheet, Alert} from "react-native";
 import Button from "../Button"
 import CircleButton from "../CircleButton";
 
 const BackgroundImage = require('../assets/BackgroundImage.jpg');
+
 const onTapToHear = () => {
     // we will implement this later
+        axios.get('http://127.0.0.1:5000/weather', {
+          params: {
+            location: 'San Francisco'
+          }
+        })
+        .then(response => {
+            console.log(response.data);
+            Alert.alert(response.data);
+            alert(response.data);
+           // handle response data here
+         })
+        .catch(error => {
+          console.log(error);
+        });
 };
 
 export default function HomeScreen({ navigation }) {
