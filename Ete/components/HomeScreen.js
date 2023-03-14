@@ -9,14 +9,14 @@ const BackgroundImage = require('../assets/BackgroundImage.jpg');
 const onTapToHear = () => {
     // we will implement this later
         axios.get('http://127.0.0.1:5000/weather', {
+//        axios.get('http://192.168.68.57:5000/weather', {
           params: {
             location: 'San Francisco'
           }
         })
         .then(response => {
-            console.log(response.data);
+//           console.log(response.data);
             Alert.alert(response.data);
-            alert(response.data);
            // handle response data here
          })
         .catch(error => {
