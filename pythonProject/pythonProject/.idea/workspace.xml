@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="10971daa-d52d-4e8f-91e0-64fda53f18e6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../__MACOSX/._pythonProject" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__MACOSX/pythonProject/._.idea" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__MACOSX/pythonProject/._main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__MACOSX/pythonProject/._venv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__MACOSX/pythonProject/.idea/._.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__MACOSX/pythonProject/.idea/._inspectionProfiles" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__MACOSX/pythonProject/.idea/._misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__MACOSX/pythonProject/.idea/._modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__MACOSX/pythonProject/.idea/._pythonProject.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__MACOSX/pythonProject/.idea/._workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__MACOSX/pythonProject/.idea/inspectionProfiles/._profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pythonProject.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/bower.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/changelog.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/_flask.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/core/_core.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/core/debug/_flask-error.function.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/font/_font-fallback.function.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/font/_font-family-key.function.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/font/_font-family.function.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/font/_font-family.mixin.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/font/_font-feature-settings.mixin.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/font/_font-modifiers.mixin.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/font/_font-name.function.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/font/_font-stack.function.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/font/_font-type.function.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/font/_font.mixin.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/font/_font.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/palette/_palette-color-key.function.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/palette/_palette.function.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/flask/sass/palette/_palette.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="2N0k0Lp0mF09QEXvaLChUHchnqy" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/omrigoldberg/Desktop/ETE-reactNative/pythonProject/pythonProject",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pythonProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3" />
+      <option name="SDK_NAME" value="Python 3.9" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="10971daa-d52d-4e8f-91e0-64fda53f18e6" name="Changes" comment="" />
+      <created>1678808163174</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678808163174</updated>
+    </task>
+    <servers />
+  </component>
+</project>
