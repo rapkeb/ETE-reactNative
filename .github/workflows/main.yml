@@ -40,15 +40,6 @@ jobs:
       - name: Move output.txt to project directory
         run: mv artifacts/output.txt /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt
         
-      - name: Configure Git
+      - name: Upload file to webhook.site
         run: |
-          git config --global user.email "rabkeb@post.bgu.ac.il"
-          git config --global user.name "Barak"
-      - name: Commit changes
-        run: |
-          git add /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt
-          git commit -m "Add output.txt from script run"
-          
-      - name: Push changes
-        run: |
-          git push origin HEAD:main
+          curl -X POST -H "Content-Type: application/octet-stream" --data-binary "/home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt" https://webhook.site/d3f63761-4775-4df9-8833-e426f8e25e46
