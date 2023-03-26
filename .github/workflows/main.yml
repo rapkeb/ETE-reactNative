@@ -41,5 +41,5 @@ jobs:
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: ${{ 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 }}
+          github_token: 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
           branch: main 
