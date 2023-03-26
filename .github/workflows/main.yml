@@ -35,11 +35,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: output
-          path: artifacts
-          
-      - name: Move output.txt to project directory
-        run: mv artifacts/output.txt /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt
+          path: ${{ github.workspace }}
         
       - name: Upload file to webhook.site
         run: |
-          curl -X POST -H "Content-Type: application/octet-stream" --data-binary "/home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt" https://webhook.site/d3f63761-4775-4df9-8833-e426f8e25e46
+          curl -X POST -H "Content-Type: application/octet-stream" --data-binary "${{ github.workspace }}/output.txt" https://webhook.site/d3f63761-4775-4df9-8833-e426f8e25e46
