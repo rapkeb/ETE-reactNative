@@ -21,5 +21,4 @@ jobs:
 
       - name: Run script
         run: |
-          cd ETE-reactNative/pythonProject/
-          python online_runner.py
+          ls
