@@ -23,3 +23,9 @@ jobs:
         run: |
           cd /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/
           python online_runner.py
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: output
+          path: /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt
