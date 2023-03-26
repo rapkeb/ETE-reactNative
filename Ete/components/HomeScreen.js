@@ -35,65 +35,13 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.container}>
             <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.image}>
                 <View style={styles.headerContainer}>
-                    <Button theme="primary" label="Home" onPress={() => navigation.navigate("Home")} />
-                    <Button theme="primary" label="Language" onPress={() => navigation.navigate("Language")} />
-                    <Button theme="primary" label="Settings" onPress={() => navigation.navigate("Settings")} />
+                    <Button theme="primary" label="Sign In" onPress={() => navigation.navigate("Main")} />
+                    <Button theme="primary" label="Sign Up" onPress={() => navigation.navigate("Main")} />
                 </View>
-                <CircleButton label="Tap To Hear" onPress={onTapToHear} />
-                <Text style={styles.midText1}>Tap to</Text>
-                <Text style={styles.midText2}>Hear</Text>
-                <TextInput style={styles.textBox} value={displayText} multiline={true}/>
             </ImageBackground>
         </View>
     );
 }
-
-//export default function HomeScreen({ navigation }) {
-//    const [displayText, setDisplayText] = useState('');
-//
-//    const onTapToHear = async () => {
-//        try {
-//                $.ajax({
-//                    type: 'POST',
-//                    url: '/Users/omrigoldberg/Desktop/ETE-reactNative/Ete/assets/main.py'
-//                })
-//            console.log("hello world");
-//                <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-//                <py-env>
-//                  - paths:
-//                    - /Users/omrigoldberg/Desktop/ETE-reactNative/Ete/assets/example.py
-//                </py-env>
-//                <py-script>
-//                    from example import generate_random_number
-//                    pyscript.write('lucky', generate_random_number())
-//                </py-script>
-//        } catch (error) {
-//            console.error(error);
-//        }
-//    };
-//
-//    const clearDisplayText = () => {
-//        setTimeout(() => {
-//          setDisplayText('');
-//        }, 4000);
-//    };
-//
-//    return (
-//        <View style={styles.container}>
-//            <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.image}>
-//                <View style={styles.headerContainer}>
-//                    <Button theme="primary" label="Home" onPress={() => navigation.navigate("Home")} />
-//                    <Button theme="primary" label="Language" onPress={() => navigation.navigate("Language")} />
-//                    <Button theme="primary" label="Settings" onPress={() => navigation.navigate("Settings")} />
-//                </View>
-//                <CircleButton label="Tap To Hear" onPress={onTapToHear} />
-//                <Text style={styles.midText1}>Tap to</Text>
-//                <Text style={styles.midText2}>Hear</Text>
-//                <TextInput style={styles.textBox} value={displayText} multiline={true}/>
-//            </ImageBackground>
-//        </View>
-//    );
-//}
 
 const styles = StyleSheet.create({
     container: {

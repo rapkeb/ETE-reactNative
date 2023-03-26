@@ -62,6 +62,26 @@ export default function Button({ label, theme, onPress }) {
             </View>
         );
     }
+        else if (theme === "primary" && label ==="Sign In") {
+            return (
+                <View
+                    style={[styles.buttonContainer, { borderWidth: 1, borderColor: "#074145", borderRadius: 20 }]}
+                >
+                    <Pressable
+                        style={[styles.button]}
+                        onPress={onPress}
+                    >
+                        <FontAwesome
+                            name="home"
+                            size={18}
+                            color="#074145"
+                            style={styles.buttonIcon}
+                        />
+                        <Text style={[styles.buttonLabel]}>{label}</Text>
+                    </Pressable>
+                </View>
+            );
+        }
     return (
         <View style={styles.buttonContainer}>
             <Pressable style={styles.button} onPress={onPress}>
