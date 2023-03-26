@@ -21,4 +21,5 @@ jobs:
 
       - name: Run script
         run: |
-          ls
+          cd /pythonProject/
+          python online_runner.py
