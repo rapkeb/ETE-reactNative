@@ -37,8 +37,7 @@ jobs:
           path: artifacts
           
       - name: Move output.txt to project directory
-        run: mv artifacts/output.txt pythonProject/output.txt
-            ls /pythonProject
+        run: mv artifacts/output.txt /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt
         
       - name: Configure Git
         run: |
