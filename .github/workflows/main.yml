@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Change to pythonProject directory
-        run: ls /home/runner/work
+        run: ls /home/runner/work/ETE-reactNative
         
       - name: Install dependencies
         run: |
