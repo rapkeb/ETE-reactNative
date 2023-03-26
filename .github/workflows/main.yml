@@ -20,4 +20,6 @@ jobs:
           python -m pip install --upgrade pip
 
       - name: Run script
-        run: python ETE-reactNative/pythonProject/online_runner.py
+        run: |
+          cd ETE-reactNative/pythonProject/
+          python online_runner.py
