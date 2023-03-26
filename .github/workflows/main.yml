@@ -45,7 +45,7 @@ jobs:
           git config --global user.name "Omri Goldberg"
       - name: Commit changes
         run: |
-          git add ETE-reactNative/pythonProject/output.txt
+          git add /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt
           git commit -m "Add output.txt from script run"
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
