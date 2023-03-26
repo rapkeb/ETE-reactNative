@@ -30,3 +30,16 @@ jobs:
         with:
           name: output
           path: /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt
+          
+      - name: commit files
+        run: |
+          git config --local user.email "rapkeb@post.bgu.ac.il"
+          git config --local user.name "Barak"
+          git add -A
+          git diff-index --quiet HEAD || (git commit -a -m "update file" --allow-empty)
+          
+      - name: push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main 
