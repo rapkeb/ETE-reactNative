@@ -14,13 +14,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+      
+      - name: Change to pythonProject directory
+        run: cd ETE-reactNative/pythonProject/
+        
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
 
       - name: Run script
         run: |
-          ls
-          cd ~/pythonProject
           python online_runner.py
