@@ -30,13 +30,3 @@ jobs:
         with:
           name: output
           path: /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt
-
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: output
-          path: ${{ github.workspace }}
-        
-      - name: Upload file to webhook.site
-        run: |
-          curl -X POST -H "Content-Type: application/octet-stream" --data-binary "@$file" https://webhook.site/d3f63761-4775-4df9-8833-e426f8e25e46
