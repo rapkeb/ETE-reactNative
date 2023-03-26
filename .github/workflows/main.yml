@@ -37,8 +37,6 @@ jobs:
           git config --local user.name "Barak"
           git add -A
           git diff-index --quiet HEAD || (git commit -a -m "update file" --allow-empty)
-          ls /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject
-          cat /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt
           
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
