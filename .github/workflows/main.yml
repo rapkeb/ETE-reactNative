@@ -14,9 +14,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
-      - name: Change to pythonProject directory
-        run: ls /home/runner/work/ETE-reactNative/ETE-reactNative
         
       - name: Install dependencies
         run: |
@@ -24,4 +21,5 @@ jobs:
 
       - name: Run script
         run: |
+          cd /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/
           python online_runner.py
