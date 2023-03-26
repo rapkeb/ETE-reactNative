@@ -38,6 +38,7 @@ jobs:
           
       - name: Move output.txt to project directory
         run: mv artifacts/output.txt pythonProject/output.txt
+            ls /pythonProject
         
       - name: Configure Git
         run: |
