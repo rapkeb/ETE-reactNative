@@ -47,8 +47,9 @@ jobs:
         run: |
           git add /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt
           git commit -m "Add output.txt from script run"
-      - name: Push changes
+      - name: Push changes to GitHub
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           branch: main
+          force: true
