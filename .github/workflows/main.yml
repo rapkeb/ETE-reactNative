@@ -30,16 +30,25 @@ jobs:
           name: output
           path: /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt
 
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: python-project
+          path: artifacts
+          
       - name: Move output.txt to project directory
         run: mv output.txt ETE-reactNative/pythonProject/
+        
       - name: Configure Git
         run: |
           git config --global user.email "omrigo13@gmail.com"
           git config --global user.name "Omri Goldberg"
+          
       - name: Commit changes
         run: |
           git add ETE-reactNative/pythonProject/output.txt
           git commit -m "Add output.txt from script run"
+          
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
