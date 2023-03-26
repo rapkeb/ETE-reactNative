@@ -21,4 +21,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run script
-        run: python online_runner.py
+        run: python ETE-reactNative/pythonProject/online_runner.py
