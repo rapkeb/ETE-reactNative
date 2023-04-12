@@ -13,27 +13,29 @@ const BackgroundImage = require('../assets/BackgroundImage.jpg');
 //const { spawn } = require('child_process');
 
 export default function HomeScreen({ navigation }) {
-    const [displayText, setDisplayText] = useState('');
 
-    const onTapToHear = async () => {
-        try {
-            const response = await axios.get('http://127.0.0.1:5000/weather');
-            setDisplayText(response.data);
-            clearDisplayText();
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const clearDisplayText = () => {
-        setTimeout(() => {
-          setDisplayText('');
-        }, 4000);
-    };
+    const [emailText, setEmailText] = useState('');
+    const [passwordText, setPasswordText] = useState('');
 
     return (
         <View style={styles.container}>
             <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.image}>
+                <View style={styles.screen}>
+                    <Text style={[styles.text, {marginTop: 170}]}>Email Address</Text>
+                    <TextInput style={styles.textBox}
+                        placeholder="enter email address here"
+                        onChangeText={text => setEmailText(text)}
+                        value={emailText}
+                    />
+                </View>
+                <View style={styles.screen}>
+                    <Text style={styles.text}>Password</Text>
+                    <TextInput style={styles.textBox}
+                        placeholder="enter password here"
+                        onChangeText={text => setPasswordText(text)}
+                        value={passwordText}
+                    />
+                </View>
                 <View style={styles.headerContainer}>
                     <Button theme="primary" label="Sign In" onPress={() => navigation.navigate("Main")} />
                     <Button theme="primary" label="Sign Up" onPress={() => navigation.navigate("Main")} />
@@ -41,44 +43,38 @@ export default function HomeScreen({ navigation }) {
             </ImageBackground>
         </View>
     );
+    /* TODO: change on press to connect to data base, check if data correct,
+    generate response and upload main page if all good*/
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+    screen: {
+        alignItems: 'center',
     },
-    image: {
-        flex: 1,
+    text: {
+        fontSize: 25,
+        color: '#fff',
+        marginBottom: 15,
+    },
+    textBox: {
+        fontSize: 20,
+        marginBottom: 15,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        padding: 10,
+        width: "80%",
     },
     headerContainer: {
         flex: 1 / 5,
         alignItems: 'center',
         flexDirection: "row",
     },
-    midText1: {
-        color: '#fff',
-        marginTop: 10,
-        fontSize:23,
-        textAlign: 'center',
+    image: {
+        flex: 1,
     },
-    midText2: {
-        color: '#fff',
-        marginTop: -3,
-        fontSize:25,
-        paddingLeft: 3,
-        textAlign: 'center',
-        fontWeight: 'bold',
-    },
-    textBox: {
-      marginTop: 50,
-      marginLeft: 20,
-      padding: 10,
-      borderWidth: 1,
-      borderRadius: 5,
-      borderColor: 'gray',
-      width: '90%',
-      height: 200,
-      backgroundColor: '#fff',
-      textAlignVertical: 'top',
+    container: {
+        flex: 1,
     },
 });
