@@ -6,17 +6,19 @@ import CircleButton from "../CircleButton";
 import * as tf from '@tensorflow/tfjs';
 import { bundleResourceIO } from '@tensorflow/tfjs-react-native';
 import { Audio } from 'expo-av';
+import DownButton from "../DownButton";
+import {auth} from "../FirebaseConfig";
 
 const BackgroundImage = require('../assets/BackgroundImage.jpg');
 
 const URL = 'https://teachablemachine.withgoogle.com/models/7F1mOpyRY/model.json';
 const modelWeights = 'https://teachablemachine.withgoogle.com/models/7F1mOpyRY/model.weights.bin'
 
-export default function MainScreen({ navigation }) {
+export default function MainScreen({ navigation, route }) {
 
     const [displayText, setDisplayText] = useState('');
     const [model, setModel] = useState(null);
-
+    const uid = route.params.uid;
     useEffect(() => {
       const loadModel = async () => {
         try {
@@ -84,18 +86,31 @@ export default function MainScreen({ navigation }) {
         }, 4000);
     };
 
+    const handleLogout = async () => {
+        try {
+            await auth.signOut();
+            navigation.navigate('Entrance');
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.image}>
                 <View style={styles.headerContainer}>
-                    <Button theme="primary" label="Home" onPress={() => navigation.navigate("Home")} />
-                    <Button theme="primary" label="Language" onPress={() => navigation.navigate("Language")} />
-                    <Button theme="primary" label="Settings" onPress={() => navigation.navigate("Settings")} />
+                    <Button theme="primary" label="Home" onPress={() => navigation.navigate("Main", { uid: uid })} />
+                    <Button theme="primary" label="Language" onPress={() => navigation.navigate("Language", { uid: uid })} />
+                    <Button theme="primary" label="Settings" onPress={() => navigation.navigate("Settings", { uid: uid })} />
                 </View>
                 <CircleButton label="Tap To Hear" onPress={onTapToHear} />
                 <Text style={styles.midText1}>Tap to</Text>
                 <Text style={styles.midText2}>Hear</Text>
                 <TextInput style={styles.textBox} value={displayText} multiline={true}/>
+                <View style={styles.footerContainer}>
+                    <Button theme="primary" label="Log Out" onPress={handleLogout}/>
+                </View>
+
             </ImageBackground>
         </View>
     );
@@ -138,5 +153,15 @@ const styles = StyleSheet.create({
       height: 200,
       backgroundColor: '#fff',
       textAlignVertical: 'top',
+    },
+    footerContainer: {
+        flex: 1,
+        alignItems: 'center',
+        flexDirection: "row",
+        // margin: -70
+        marginBottom:-100
+
+
+
     },
 });

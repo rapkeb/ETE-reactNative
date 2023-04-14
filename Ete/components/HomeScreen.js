@@ -7,6 +7,7 @@ import CircleButton from "../CircleButton";
 //import $ from 'jquery-ajax';
 //import RNFS from 'react-native-fs';
 //import { usePython } from 'react-py'
+import {auth,db} from "../FirebaseConfig";
 
 const BackgroundImage = require('../assets/BackgroundImage.jpg');
 
@@ -17,6 +18,62 @@ export default function HomeScreen({ navigation }) {
     const [emailText, setEmailText] = useState('');
     const [passwordText, setPasswordText] = useState('');
 
+    const handleSignup = async () => {
+        try {
+            await auth.createUserWithEmailAndPassword(emailText, passwordText);
+            await auth.signInWithEmailAndPassword(emailText, passwordText);
+            const user = auth.currentUser;
+
+            // Check if the email already exists in the database
+            const emailSnapshot = await db.ref('users').orderByChild('email').equalTo(user.email).once('value');
+            if (emailSnapshot.exists()) {
+                Alert.alert('Email already exists');
+                return;
+            }
+
+            // Check if the uid already exists in the database
+            const uidSnapshot = await db.ref('users').orderByChild('uid').equalTo(user.uid).once('value');
+            if (uidSnapshot.exists()) {
+                Alert.alert('UID already exists');
+                return;
+            }
+            // Add the user to the database
+            await db.ref('users').push({
+                uid: user.uid,
+                email: user.email,
+                LanguageHeard:"English",
+                LanguageWritten:"English",
+                WorkingMode:"Home",
+                TextSize:12,
+                TextStyle:"Italic",
+                TextColor:"White",
+                TextLocation:"Center"
+                // add other properties here
+            });
+            navigation.navigate("Main",{ uid: user.uid });
+            // Clear the email and password input values
+            setEmailText('');
+            setPasswordText('');
+        } catch (error) {
+            console.log(error.message);
+            Alert.alert(error.message);
+            setPasswordText('');
+        }
+    };
+
+    const handlelogin = async () => {
+        try {
+            await auth.signInWithEmailAndPassword(emailText, passwordText);
+            const user = auth.currentUser;
+            navigation.navigate("Main",{ uid: user.uid });
+            setEmailText('');
+            setPasswordText('');
+        } catch (error) {
+            console.log(error.message);
+            Alert.alert(error.message)
+            setPasswordText('');
+        }
+    };
     return (
         <View style={styles.container}>
             <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.image}>
@@ -26,6 +83,10 @@ export default function HomeScreen({ navigation }) {
                         placeholder="enter email address here"
                         onChangeText={text => setEmailText(text)}
                         value={emailText}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        keyboardType="email-address"
+
                     />
                 </View>
                 <View style={styles.screen}>
@@ -34,11 +95,15 @@ export default function HomeScreen({ navigation }) {
                         placeholder="enter password here"
                         onChangeText={text => setPasswordText(text)}
                         value={passwordText}
+                        secureTextEntry
+                        autoCapitalize="none"
+                        autoCorrect={false}
+
                     />
                 </View>
                 <View style={styles.headerContainer}>
-                    <Button theme="primary" label="Sign In" onPress={() => navigation.navigate("Main")} />
-                    <Button theme="primary" label="Sign Up" onPress={() => navigation.navigate("Main")} />
+                    <Button theme="primary" label="Sign In" onPress={handlelogin} />
+                    <Button theme="primary" label="Sign Up" onPress={handleSignup} />
                 </View>
             </ImageBackground>
         </View>

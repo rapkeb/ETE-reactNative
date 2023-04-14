@@ -1,25 +1,87 @@
 // Aboutscreen.js
-import React, { useState } from "react";
-import {ImageBackground, View, Text, StyleSheet} from "react-native";
+import React, {useEffect, useState} from "react";
+import {ImageBackground, View, Text, StyleSheet, Alert} from "react-native";
 import Button from "../Button"
 import {Picker} from "@react-native-picker/picker";
 import DownButton from "../DownButton";
+import {db} from "../FirebaseConfig";
 
 const BackgroundImage = require('../assets/BackgroundImage.jpg');
 
-export default function SettingsScreen({navigation}) {
-    const [WorkingMode, setWorkingMode] = useState("Home");
-    const [TextSize, setTextSize] = useState("12");
-    const [TextStyle, setTextStyle] = useState("Italic");
-    const [TextColor, setTextColor] = useState("White");
-    const [TextLocation, setTextLocation] = useState("Center");
+export default function SettingsScreen({navigation, route}) {
+    const [WorkingMode, setWorkingMode] = useState("");
+    const [TextSize, setTextSize] = useState(null);
+    const [TextStyle, setTextStyle] = useState("");
+    const [TextColor, setTextColor] = useState("");
+    const [TextLocation, setTextLocation] = useState("");
+    const uid = route.params.uid;
+
+    useEffect(() => {
+        const userRef = db.ref("users").orderByChild("uid").equalTo(uid);
+        const listener = userRef.on("value", (snapshot) => {
+            const userData = snapshot.val();
+            const userId = Object.keys(userData)[0];
+            setWorkingMode(userData[userId].WorkingMode);
+            setTextSize(userData[userId].TextSize);
+            setTextStyle(userData[userId].TextStyle);
+            setTextColor(userData[userId].TextColor);
+            setTextLocation(userData[userId].TextLocation);
+
+        });
+        return () => userRef.off("value", listener);
+    }, [uid]);
+
+    const onSave = async () => {
+        try {
+            const uid = route.params.uid;
+            const userRef = db.ref("users");
+            const snapshot = await userRef.orderByChild("uid").equalTo(uid).once("value");
+
+            if (snapshot.exists()) {
+                const userKey = Object.keys(snapshot.val())[0];
+                await userRef.child(userKey).update({
+                    WorkingMode: WorkingMode,
+                    TextSize: TextSize,
+                    TextStyle: TextStyle,
+                    TextColor: TextColor,
+                    TextLocation: TextLocation
+                });
+            }
+            Alert.alert("saved")
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    const onCancel = async () => {
+        try {
+            const uid = route.params.uid;
+            const userRef = db.ref('users');
+            await userRef.orderByChild('uid').equalTo(uid).once('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    const userId = Object.keys(userData)[0];
+                    setWorkingMode(userData[userId].WorkingMode);
+                    setTextSize(userData[userId].TextSize);
+                    setTextStyle(userData[userId].TextStyle);
+                    setTextColor(userData[userId].TextColor);
+                    setTextLocation(userData[userId].TextLocation);
+                } else {
+                    console.log('User not found');
+                }
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.image}>
                 <View style={styles.headerContainer}>
-                    <Button theme="primary" label="Home" onPress={() => navigation.navigate("Home")} />
-                    <Button theme="primary" label="Language" onPress={() => navigation.navigate("Language")} />
-                    <Button theme="primary" label="Settings" onPress={() => navigation.navigate("Settings")} />
+                    <Button theme="primary" label="Home" onPress={() => navigation.navigate("Main",  { uid: uid })} />
+                    <Button theme="primary" label="Language" onPress={() => navigation.navigate("Language",  { uid: uid })} />
+                    <Button theme="primary" label="Settings" onPress={() => navigation.navigate("Settings",  { uid: uid })} />
                 </View>
                 <View style={styles.screen}>
                     <Text style={styles.text}>Working mode</Text>
@@ -77,8 +139,8 @@ export default function SettingsScreen({navigation}) {
                     </Picker>
                 </View>
                 <View style={styles.footerContainer}>
-                    <DownButton label="Save" />
-                    <DownButton label="Cancel" />
+                    <DownButton label="Save" onPress={onSave}/>
+                    <DownButton label="Cancel" onPress={onCancel}/>
                 </View>
             </ImageBackground>
         </View>

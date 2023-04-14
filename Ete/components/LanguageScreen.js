@@ -1,22 +1,73 @@
 // Aboutscreen.js
-import React, { useState } from "react";
-import {ImageBackground, View, Text, StyleSheet} from "react-native";
+import React, {useEffect, useState} from "react";
+import {ImageBackground, View, Text, StyleSheet, Alert} from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import Button from "../Button"
 import DownButton from "../DownButton"
+import {db} from "../FirebaseConfig";
 
 const BackgroundImage = require('../assets/BackgroundImage.jpg');
 
-export default function LanguageScreen({navigation}) {
-    const [LanguageHeard, setLanguageHeard] = useState("English");
-    const [LanguageWritten, setLanguageWritten] = useState("English");
+export default function LanguageScreen({navigation, route}) {
+    const [LanguageHeard, setLanguageHeard] = useState("");
+    const [LanguageWritten, setLanguageWritten] = useState("");
+    const uid = route.params.uid;
+    useEffect(() => {
+        const userRef = db.ref("users").orderByChild("uid").equalTo(uid);
+        const listener = userRef.on("value", (snapshot) => {
+            const userData = snapshot.val();
+            const userId = Object.keys(userData)[0];
+            setLanguageHeard(userData[userId].LanguageHeard);
+            setLanguageWritten(userData[userId].LanguageWritten);
+        });
+        return () => userRef.off("value", listener);
+    }, [uid]);
+
+    const onSave = async () => {
+        try {
+            const uid = route.params.uid;
+            const userRef = db.ref("users");
+            const snapshot = await userRef.orderByChild("uid").equalTo(uid).once("value");
+
+            if (snapshot.exists()) {
+                const userKey = Object.keys(snapshot.val())[0];
+                await userRef.child(userKey).update({
+                    LanguageHeard: LanguageHeard,
+                    LanguageWritten: LanguageWritten
+                });
+            }
+            Alert.alert("saved")
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    const onCancel = async () => {
+        try {
+            const uid = route.params.uid;
+            const userRef = db.ref('users');
+            await userRef.orderByChild('uid').equalTo(uid).once('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    const userId = Object.keys(userData)[0];
+                    setLanguageHeard(userData[userId].LanguageHeard);
+                    setLanguageWritten(userData[userId].LanguageWritten);
+                } else {
+                    console.log('User not found');
+                }
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.image}>
                 <View style={styles.headerContainer}>
-                    <Button theme="primary" label="Home" onPress={() => navigation.navigate("Home")} />
-                    <Button theme="primary" label="Language" onPress={() => navigation.navigate("Language")} />
-                    <Button theme="primary" label="Settings" onPress={() => navigation.navigate("Settings")} />
+                    <Button theme="primary" label="Home" onPress={() => navigation.navigate("Main", { uid: uid })} />
+                    <Button theme="primary" label="Language" onPress={() => navigation.navigate("Language", { uid: uid })} />
+                    <Button theme="primary" label="Settings" onPress={() => navigation.navigate("Settings", { uid: uid })} />
                 </View>
                 <View style={styles.screen}>
                     <Text style={styles.text}>Language Heard</Text>
@@ -43,8 +94,8 @@ export default function LanguageScreen({navigation}) {
                     </Picker>
                 </View>
                 <View style={styles.footerContainer}>
-                    <DownButton label="Save" />
-                    <DownButton label="Cancel" />
+                    <DownButton label="Save" onPress={onSave}/>
+                    <DownButton label="Cancel" onPress={onCancel}/>
                 </View>
             </ImageBackground>
         </View>
