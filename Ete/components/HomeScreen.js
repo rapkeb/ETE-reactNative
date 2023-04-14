@@ -26,6 +26,10 @@ export default function HomeScreen({ navigation }) {
                         placeholder="enter email address here"
                         onChangeText={text => setEmailText(text)}
                         value={emailText}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        keyboardType="email-address"
+
                     />
                 </View>
                 <View style={styles.screen}>
@@ -34,6 +38,10 @@ export default function HomeScreen({ navigation }) {
                         placeholder="enter password here"
                         onChangeText={text => setPasswordText(text)}
                         value={passwordText}
+                        secureTextEntry
+                        autoCapitalize="none"
+                        autoCorrect={false}
+
                     />
                 </View>
                 <View style={styles.headerContainer}>
