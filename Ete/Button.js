@@ -62,6 +62,34 @@ export default function Button({ label, theme, onPress }) {
             </View>
         );
     }
+    else if (theme === "primary" && label ==="Sign In") {
+        return (
+            <View
+                style={[styles.buttonCenter, { borderWidth: 3, marginHorizontal: '10%', borderColor: "#074145", borderRadius: 20, marginTop: 100, }]}
+            >
+                <Pressable
+                    style={[styles.button]}
+                    onPress={onPress}
+                >
+                <Text style={[styles.buttonLabelCenter]}>{label}</Text>
+                </Pressable>
+            </View>
+        );
+    }
+    else if (theme === "primary" && label ==="Sign Up") {
+        return (
+            <View
+                style={[styles.buttonCenter, { borderWidth: 3, marginHorizontal: '-8%', borderColor: "#074145", borderRadius: 20, marginTop: 100, }]}
+            >
+                <Pressable
+                    style={[styles.button]}
+                    onPress={onPress}
+                >
+                <Text style={[styles.buttonLabelCenter]}>{label}</Text>
+                </Pressable>
+            </View>
+        );
+    }
     return (
         <View style={styles.buttonContainer}>
             <Pressable style={styles.button} onPress={onPress}>
@@ -79,6 +107,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    buttonCenter: {
+        width: '40%',
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     button: {
         borderRadius: 10,
         width: '100%',
@@ -93,5 +127,9 @@ const styles = StyleSheet.create({
     buttonLabel: {
         color: '#fff',
         fontSize: 18,
+    },
+    buttonLabelCenter: {
+        color: '#fff',
+        fontSize: 30,
     },
 });

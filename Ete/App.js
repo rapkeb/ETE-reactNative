@@ -105,6 +105,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from "./components/HomeScreen";
+import MainScreen from "./components/MainScreen";
 import LanguageScreen from "./components/LanguageScreen";
 import SettingsScreen from "./components/SettingsScreen";
 
@@ -116,9 +117,10 @@ const Stack = createNativeStackNavigator();
 const App = () => (
     <NavigationContainer>
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Language" component={LanguageScreen} />
-            <Stack.Screen name="Settings" component={SettingsScreen} />
+            <Stack.Screen name="Entrance" options={{headerShown:false}} component={HomeScreen} />
+            <Stack.Screen name="Main" options={{headerShown:false}} component={MainScreen} />
+            <Stack.Screen name="Language" options={{headerShown:false}} component={LanguageScreen} />
+            <Stack.Screen name="Settings" options={{headerShown:false}} component={SettingsScreen} />
         </Stack.Navigator>
     </NavigationContainer>
 );
