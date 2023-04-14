@@ -10,7 +10,7 @@ const BackgroundImage = require('../assets/BackgroundImage.jpg');
 
 export default function SettingsScreen({navigation, route}) {
     const [WorkingMode, setWorkingMode] = useState("");
-    const [TextSize, setTextSize] = useState("");
+    const [TextSize, setTextSize] = useState(null);
     const [TextStyle, setTextStyle] = useState("");
     const [TextColor, setTextColor] = useState("");
     const [TextLocation, setTextLocation] = useState("");
