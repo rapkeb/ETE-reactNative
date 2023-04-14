@@ -1,0 +1,45 @@
+# name: Run Python Script
+
+# on:
+#   schedule:
+#     - cron: '0 0 * * *'
+
+#   push:
+#     branches: [main]
+#   workflow_dispatch:
+  
+# jobs:
+#   run_script:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+        
+#       - name: Install dependencies
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install -r /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/requirements.txt
+
+#       - name: Run script
+#         run: |
+#           cd /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/
+#           python online_runner.py
+      
+#       - name: Upload artifact
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: output
+#           path: /home/runner/work/ETE-reactNative/ETE-reactNative/pythonProject/output.txt
+          
+#       - name: commit files
+#         run: |
+#           git config --local user.email "rapkeb@post.bgu.ac.il"
+#           git config --local user.name "Barak"
+#           git add -A
+#           git diff-index --quiet HEAD || (git commit -a -m "update file" --allow-empty)
+          
+#       - name: push changes
+#         uses: ad-m/github-push-action@v0.6.0
+#         with:
+#           github_token: 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
+#           branch: main 
