@@ -1,6 +1,6 @@
 // Aboutscreen.js
 import React, {useEffect, useState} from "react";
-import {ImageBackground, View, Text, StyleSheet} from "react-native";
+import {ImageBackground, View, Text, StyleSheet, Alert} from "react-native";
 import Button from "../Button"
 import {Picker} from "@react-native-picker/picker";
 import DownButton from "../DownButton";
@@ -30,6 +30,28 @@ export default function SettingsScreen({navigation, route}) {
         });
         return () => userRef.off("value", listener);
     }, [uid]);
+
+    const onSave = async () => {
+        try {
+            const uid = route.params.uid;
+            const userRef = db.ref("users");
+            const snapshot = await userRef.orderByChild("uid").equalTo(uid).once("value");
+
+            if (snapshot.exists()) {
+                const userKey = Object.keys(snapshot.val())[0];
+                await userRef.child(userKey).update({
+                    WorkingMode: WorkingMode,
+                    TextSize: TextSize,
+                    TextStyle: TextStyle,
+                    TextColor: TextColor,
+                    TextLocation: TextLocation
+                });
+            }
+            Alert.alert("saved")
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     return (
         <View style={styles.container}>
@@ -95,7 +117,7 @@ export default function SettingsScreen({navigation, route}) {
                     </Picker>
                 </View>
                 <View style={styles.footerContainer}>
-                    <DownButton label="Save" />
+                    <DownButton label="Save" onPress={onSave}/>
                     <DownButton label="Cancel" />
                 </View>
             </ImageBackground>
