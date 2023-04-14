@@ -22,6 +22,7 @@ export default function LanguageScreen({navigation, route}) {
         });
         return () => userRef.off("value", listener);
     }, [uid]);
+
     const onSave = async () => {
         try {
             const uid = route.params.uid;
@@ -36,6 +37,25 @@ export default function LanguageScreen({navigation, route}) {
                 });
             }
             Alert.alert("saved")
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    const onCancel = async () => {
+        try {
+            const uid = route.params.uid;
+            const userRef = db.ref('users');
+            await userRef.orderByChild('uid').equalTo(uid).once('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    const userId = Object.keys(userData)[0];
+                    setLanguageHeard(userData[userId].LanguageHeard);
+                    setLanguageWritten(userData[userId].LanguageWritten);
+                } else {
+                    console.log('User not found');
+                }
+            });
         } catch (error) {
             console.log(error.message);
         }
@@ -75,7 +95,7 @@ export default function LanguageScreen({navigation, route}) {
                 </View>
                 <View style={styles.footerContainer}>
                     <DownButton label="Save" onPress={onSave}/>
-                    <DownButton label="Cancel" />
+                    <DownButton label="Cancel" onPress={onCancel}/>
                 </View>
             </ImageBackground>
         </View>
