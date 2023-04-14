@@ -16,7 +16,7 @@ export default function MainScreen({ navigation, route }) {
 
     const [displayText, setDisplayText] = useState('');
     const [model, setModel] = useState(null);
-
+    const uid = route.params.uid;
     useEffect(() => {
       const loadModel = async () => {
         try {
@@ -88,9 +88,9 @@ export default function MainScreen({ navigation, route }) {
         <View style={styles.container}>
             <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.image}>
                 <View style={styles.headerContainer}>
-                    <Button theme="primary" label="Home" onPress={() => navigation.navigate("Home")} />
-                    <Button theme="primary" label="Language" onPress={() => navigation.navigate("Language")} />
-                    <Button theme="primary" label="Settings" onPress={() => navigation.navigate("Settings")} />
+                    <Button theme="primary" label="Home" onPress={() => navigation.navigate("Main", { uid: uid })} />
+                    <Button theme="primary" label="Language" onPress={() => navigation.navigate("Language", { uid: uid })} />
+                    <Button theme="primary" label="Settings" onPress={() => navigation.navigate("Settings", { uid: uid })} />
                 </View>
                 <CircleButton label="Tap To Hear" onPress={onTapToHear} />
                 <Text style={styles.midText1}>Tap to</Text>
