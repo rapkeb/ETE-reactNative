@@ -53,6 +53,28 @@ export default function SettingsScreen({navigation, route}) {
         }
     };
 
+    const onCancel = async () => {
+        try {
+            const uid = route.params.uid;
+            const userRef = db.ref('users');
+            await userRef.orderByChild('uid').equalTo(uid).once('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    const userId = Object.keys(userData)[0];
+                    setWorkingMode(userData[userId].WorkingMode);
+                    setTextSize(userData[userId].TextSize);
+                    setTextStyle(userData[userId].TextStyle);
+                    setTextColor(userData[userId].TextColor);
+                    setTextLocation(userData[userId].TextLocation);
+                } else {
+                    console.log('User not found');
+                }
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.image}>
@@ -118,7 +140,7 @@ export default function SettingsScreen({navigation, route}) {
                 </View>
                 <View style={styles.footerContainer}>
                     <DownButton label="Save" onPress={onSave}/>
-                    <DownButton label="Cancel" />
+                    <DownButton label="Cancel" onPress={onCancel}/>
                 </View>
             </ImageBackground>
         </View>
