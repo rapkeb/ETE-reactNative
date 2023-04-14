@@ -60,6 +60,20 @@ export default function HomeScreen({ navigation }) {
             setPasswordText('');
         }
     };
+
+    const handlelogin = async () => {
+        try {
+            await auth.signInWithEmailAndPassword(emailText, passwordText);
+            const user = auth.currentUser;
+            navigation.navigate("Main",{ uid: user.uid });
+            setEmailText('');
+            setPasswordText('');
+        } catch (error) {
+            console.log(error.message);
+            Alert.alert(error.message)
+            setPasswordText('');
+        }
+    };
     return (
         <View style={styles.container}>
             <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.image}>
@@ -88,7 +102,7 @@ export default function HomeScreen({ navigation }) {
                     />
                 </View>
                 <View style={styles.headerContainer}>
-                    <Button theme="primary" label="Sign In" onPress={() => navigation.navigate("Main")} />
+                    <Button theme="primary" label="Sign In" onPress={handlelogin} />
                     <Button theme="primary" label="Sign Up" onPress={handleSignup} />
                 </View>
             </ImageBackground>

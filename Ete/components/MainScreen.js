@@ -12,7 +12,7 @@ const BackgroundImage = require('../assets/BackgroundImage.jpg');
 const URL = 'https://teachablemachine.withgoogle.com/models/7F1mOpyRY/model.json';
 const modelWeights = 'https://teachablemachine.withgoogle.com/models/7F1mOpyRY/model.weights.bin'
 
-export default function MainScreen({ navigation }) {
+export default function MainScreen({ navigation, route }) {
 
     const [displayText, setDisplayText] = useState('');
     const [model, setModel] = useState(null);
