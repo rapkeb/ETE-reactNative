@@ -1,29 +1,82 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import {ImageBackground, View, Text, StyleSheet, Alert, TextInput} from "react-native";
 import Button from "../Button"
 import CircleButton from "../CircleButton";
-//import {PythonShell} from 'python-shell';
-//import $ from 'jquery-ajax';
-//import RNFS from 'react-native-fs';
-//import { usePython } from 'react-py'
+import * as tf from '@tensorflow/tfjs';
+import { bundleResourceIO } from '@tensorflow/tfjs-react-native';
+import { Audio } from 'expo-av';
 
 const BackgroundImage = require('../assets/BackgroundImage.jpg');
 
-//const { spawn } = require('child_process');
+const URL = 'https://teachablemachine.withgoogle.com/models/7F1mOpyRY/model.json';
+const modelWeights = 'https://teachablemachine.withgoogle.com/models/7F1mOpyRY/model.weights.bin'
 
-export default function HomeScreen({ navigation }) {
+export default function MainScreen({ navigation }) {
+
     const [displayText, setDisplayText] = useState('');
+    const [model, setModel] = useState(null);
 
-    const onTapToHear = async () => {
+    useEffect(() => {
+      const loadModel = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:5000/weather');
-            setDisplayText(response.data);
-            clearDisplayText();
-        } catch (error) {
+            await tf.ready();
+            const loadedModel = await tf.loadLayersModel(URL);
+            setModel(loadedModel);
+          } catch (error) {
             console.error(error);
+          }
+        };
+        loadModel();
+      }, []);
+
+      const onTapToHear = async () => {
+        try {
+          await Audio.setAudioModeAsync({
+            allowsRecordingIOS: true,
+            playsInSilentModeIOS: true,
+          });
+          const { status } = await Audio.requestPermissionsAsync();
+          if (status !== 'granted') {
+            Alert.alert('Microphone permission not granted');
+            return;
+          }
+          const recording = new Audio.Recording();
+          const recordingOptions = {
+            ...Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY,
+            ios: {
+              extension: '.wav',
+              outputFormat: Audio.RECORDING_OPTION_IOS_OUTPUT_FORMAT_LINEARPCM,
+              audioQuality: Audio.RECORDING_OPTION_IOS_AUDIO_QUALITY_MAX,
+              sampleRate: 44100,
+              numberOfChannels: 1,
+              bitRate: 128000,
+            },
+            android: {
+              extension: '.wav',
+              audioEncoder: Audio.RECORDING_OPTION_ANDROID_AUDIO_ENCODER_AAC,
+              sampleRate: 44100,
+              numberOfChannels: 1,
+              bitRate: 128000,
+              outputFormat: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
+            },
+          };
+          await recording.prepareToRecordAsync(recordingOptions);
+          await recording.startAsync();
+          setTimeout(async () => {
+            await recording.stopAndUnloadAsync();
+            const audioData = await recording.getURI();
+//            const prediction = await model.predict(audioData);
+//            const { sound } = await recording.createNewLoadedSoundAsync();
+//            const audioData = await sound.downloadAsync();
+//            const prediction = await predict(audioData.uri);
+//            setDisplayText(prediction.toString());
+          }, 5000);
+          clearDisplayText();
+        } catch (error) {
+          console.error(error);
         }
-    };
+      };
 
     const clearDisplayText = () => {
         setTimeout(() => {
@@ -47,53 +100,6 @@ export default function HomeScreen({ navigation }) {
         </View>
     );
 }
-
-//export default function HomeScreen({ navigation }) {
-//    const [displayText, setDisplayText] = useState('');
-//
-//    const onTapToHear = async () => {
-//        try {
-//                $.ajax({
-//                    type: 'POST',
-//                    url: '/Users/omrigoldberg/Desktop/ETE-reactNative/Ete/assets/main.py'
-//                })
-//            console.log("hello world");
-//                <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-//                <py-env>
-//                  - paths:
-//                    - /Users/omrigoldberg/Desktop/ETE-reactNative/Ete/assets/example.py
-//                </py-env>
-//                <py-script>
-//                    from example import generate_random_number
-//                    pyscript.write('lucky', generate_random_number())
-//                </py-script>
-//        } catch (error) {
-//            console.error(error);
-//        }
-//    };
-//
-//    const clearDisplayText = () => {
-//        setTimeout(() => {
-//          setDisplayText('');
-//        }, 4000);
-//    };
-//
-//    return (
-//        <View style={styles.container}>
-//            <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.image}>
-//                <View style={styles.headerContainer}>
-//                    <Button theme="primary" label="Home" onPress={() => navigation.navigate("Home")} />
-//                    <Button theme="primary" label="Language" onPress={() => navigation.navigate("Language")} />
-//                    <Button theme="primary" label="Settings" onPress={() => navigation.navigate("Settings")} />
-//                </View>
-//                <CircleButton label="Tap To Hear" onPress={onTapToHear} />
-//                <Text style={styles.midText1}>Tap to</Text>
-//                <Text style={styles.midText2}>Hear</Text>
-//                <TextInput style={styles.textBox} value={displayText} multiline={true}/>
-//            </ImageBackground>
-//        </View>
-//    );
-//}
 
 const styles = StyleSheet.create({
     container: {
