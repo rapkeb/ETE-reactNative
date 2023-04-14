@@ -90,6 +90,20 @@ export default function Button({ label, theme, onPress }) {
             </View>
         );
     }
+    else if (theme === "primary" && label ==="Log Out") {
+        return (
+            <View
+                style={[styles.buttonCenter, { borderWidth: 3, marginHorizontal: '28%', borderColor: "#074145", borderRadius: 100, marginBottom:-60 ,marginTop: 5}]}
+            >
+                <Pressable
+                    style={[styles.button]}
+                    onPress={onPress}
+                >
+                    <Text style={[styles.buttonLabelCenter]}>{label}</Text>
+                </Pressable>
+            </View>
+        );
+    }
     return (
         <View style={styles.buttonContainer}>
             <Pressable style={styles.button} onPress={onPress}>
@@ -130,6 +144,7 @@ const styles = StyleSheet.create({
     },
     buttonLabelCenter: {
         color: '#fff',
-        fontSize: 30,
+        fontSize: 20,
     },
+
 });

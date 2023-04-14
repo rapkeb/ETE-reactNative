@@ -6,6 +6,8 @@ import CircleButton from "../CircleButton";
 import * as tf from '@tensorflow/tfjs';
 import { bundleResourceIO } from '@tensorflow/tfjs-react-native';
 import { Audio } from 'expo-av';
+import DownButton from "../DownButton";
+import {auth} from "../FirebaseConfig";
 
 const BackgroundImage = require('../assets/BackgroundImage.jpg');
 
@@ -84,6 +86,15 @@ export default function MainScreen({ navigation, route }) {
         }, 4000);
     };
 
+    const handleLogout = async () => {
+        try {
+            await auth.signOut();
+            navigation.navigate('Entrance');
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <ImageBackground source={BackgroundImage} resizeMode="cover" style={styles.image}>
@@ -96,6 +107,10 @@ export default function MainScreen({ navigation, route }) {
                 <Text style={styles.midText1}>Tap to</Text>
                 <Text style={styles.midText2}>Hear</Text>
                 <TextInput style={styles.textBox} value={displayText} multiline={true}/>
+                <View style={styles.footerContainer}>
+                    <Button theme="primary" label="Log Out" onPress={handleLogout}/>
+                </View>
+
             </ImageBackground>
         </View>
     );
@@ -138,5 +153,15 @@ const styles = StyleSheet.create({
       height: 200,
       backgroundColor: '#fff',
       textAlignVertical: 'top',
+    },
+    footerContainer: {
+        flex: 1,
+        alignItems: 'center',
+        flexDirection: "row",
+        // margin: -70
+        marginBottom:-100
+
+
+
     },
 });
