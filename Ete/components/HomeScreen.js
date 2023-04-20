@@ -65,6 +65,8 @@ export default function HomeScreen({ navigation }) {
         try {
             await auth.signInWithEmailAndPassword(emailText, passwordText);
             const user = auth.currentUser;
+            Alert.alert("Sign in successfully!!")
+            console.log("user successfully signed in "+user.email);
             navigation.navigate("Main",{ uid: user.uid });
             setEmailText('');
             setPasswordText('');
