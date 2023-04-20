@@ -89,6 +89,8 @@ export default function MainScreen({ navigation, route }) {
     const handleLogout = async () => {
         try {
             await auth.signOut();
+            Alert.alert("Log out successfully!!")
+            console.log("the user logged out")
             navigation.navigate('Entrance');
         } catch (error) {
             console.error(error);
