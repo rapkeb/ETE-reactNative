@@ -36,7 +36,7 @@ export default function LanguageScreen({navigation, route}) {
                     LanguageWritten: LanguageWritten
                 });
             }
-            Alert.alert("saved")
+            Alert.alert("The changes have been saved")
         } catch (error) {
             console.log(error.message);
         }

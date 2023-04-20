@@ -70,6 +70,7 @@ export default function SettingsScreen({navigation, route}) {
                     console.log('User not found');
                 }
             });
+            Alert.alert("The changes have been saved")
         } catch (error) {
             console.log(error.message);
         }
