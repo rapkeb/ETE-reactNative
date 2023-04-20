@@ -23,6 +23,8 @@ export default function HomeScreen({ navigation }) {
             await auth.createUserWithEmailAndPassword(emailText, passwordText);
             await auth.signInWithEmailAndPassword(emailText, passwordText);
             const user = auth.currentUser;
+            Alert.alert("Sign up successfully!!")
+            console.log("user signed up successfully "+user.email)
 
             // Check if the email already exists in the database
             const emailSnapshot = await db.ref('users').orderByChild('email').equalTo(user.email).once('value');
