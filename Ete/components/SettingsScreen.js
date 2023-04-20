@@ -47,7 +47,7 @@ export default function SettingsScreen({navigation, route}) {
                     TextLocation: TextLocation
                 });
             }
-            Alert.alert("saved")
+            Alert.alert("The changes have been saved")
         } catch (error) {
             console.log(error.message);
         }
@@ -70,7 +70,6 @@ export default function SettingsScreen({navigation, route}) {
                     console.log('User not found');
                 }
             });
-            Alert.alert("The changes have been saved")
         } catch (error) {
             console.log(error.message);
         }
